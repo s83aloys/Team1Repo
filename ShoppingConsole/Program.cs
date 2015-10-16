@@ -10,27 +10,48 @@ namespace ShoppingConsole
     {
         static void Main(string[] args)
         {
-            string[,] items = new string[,] { { "Eggs", "10" }, { "Bread", "15" } };
-            string input;
-            int price = 0;
-            int quantity;
-            int index;
-            
-            for (int i=0;i<items)
+            List<string> selection = new List<string>();
+            List<string> quantity = new List<string>();
+            bool flag = true;
 
-            Console.WriteLine(items);
+            Console.WriteLine("---=== Welcome to E-Mart ===---");
+            Console.WriteLine();
 
             do
             {
-                input = Console.ReadLine();
-                Console.WriteLine("Enter quantity: ");
-                index = Convert.ToInt32(input) + 1;
-                quantity = Convert.ToInt32(Console.ReadLine());
-                price += quantity * Convert.ToInt32(items[index, 1]); // accessing price of item
+                Menu();
 
-            } while (input != "S");
+                Console.Write("Selection: ");
 
-            Console.WriteLine("Your total: " + price);
+                selection.Add(Console.ReadLine());
+
+                Console.Write("Quantity: ");
+
+                quantity.Add(Console.ReadLine());
+
+                Console.Write("Continue? Y/N:  ");
+
+                if (Console.ReadLine().Equals("N"))
+                    flag = false;
+
+                Console.WriteLine();
+
+            } while (flag);
+
+            ShoppingCart(selection, quantity);
+        }
+
+        public static void Menu()
+        {
+            Console.WriteLine("Select your item and quantity:");
+            Console.WriteLine("1. GorTex Boots");
+            Console.WriteLine("2. GorTex Jacket");
+            Console.WriteLine();
+        }
+
+        public static void ShoppingCart(List<String> selection, List<String> quantity)
+        {
+
         }
     }
 }
