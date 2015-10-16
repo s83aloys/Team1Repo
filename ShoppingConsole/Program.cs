@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingConsole
 {
-    class Program
+    public class Program
     {
         public const double BOOTS_PRICE=4;
         public const double JACKET_PRICE = 4;
