@@ -8,10 +8,11 @@ namespace ShoppingConsole
 {
     class Program
     {
+        public const double BOOTS_PRICE=4;
+        public const double JACKET_PRICE = 4;
         static void Main(string[] args)
         {
             List<string> selection = new List<string>();
-            List<string> quantity = new List<string>();
             bool flag = true;
 
             Console.WriteLine("---=== Welcome to E-Mart ===---");
@@ -25,10 +26,6 @@ namespace ShoppingConsole
 
                 selection.Add(Console.ReadLine());
 
-                Console.Write("Quantity: ");
-
-                quantity.Add(Console.ReadLine());
-
                 Console.Write("Continue? Y/N:  ");
 
                 if (Console.ReadLine().Equals("N"))
@@ -38,7 +35,10 @@ namespace ShoppingConsole
 
             } while (flag);
 
-            ShoppingCart(selection, quantity);
+
+
+            Console.WriteLine("Your total purchase is $ {0}", ShoppingCart(selection));
+            Console.Read();
         }
 
         public static void Menu()
@@ -49,9 +49,69 @@ namespace ShoppingConsole
             Console.WriteLine();
         }
 
-        public static void ShoppingCart(List<String> selection, List<String> quantity)
+        public static double ShoppingCart(List<String> selection)
         {
+            double pricetotal = 0;
 
+            if (selection.Count() > 1)
+            {
+                for (int i = 0; i < selection.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        if (selection[i].Equals("1"))
+                        {
+                            pricetotal += BOOTS_PRICE;
+                        }
+                        else
+                        {
+                            pricetotal += JACKET_PRICE;    
+                        }
+                        
+                    }
+                    else if (i > 0 && selection[i - 1].Equals(selection[i]))
+                    {
+                        if (selection[i].Equals("1"))
+                        {
+                            pricetotal += (BOOTS_PRICE * 0.7);
+                        }
+                        else
+                        {
+                            pricetotal += (JACKET_PRICE * 0.7);    
+                        }
+                                                
+                    }
+                    else if (i > 0 && !(selection[i - 1].Equals(selection[i])))
+                    {
+                                                
+                        if (selection[i].Equals("1"))
+                        {
+                            pricetotal += (BOOTS_PRICE * 0.5);
+                        }
+                        else
+                        {
+                            pricetotal += (JACKET_PRICE * 0.5);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (selection[0].Equals("1"))
+                {
+                    pricetotal += BOOTS_PRICE;
+                }
+                else
+                {
+                    pricetotal += JACKET_PRICE;
+                }
+                        
+            }
+
+            return pricetotal;
         }
+
+
+
     }
 }
